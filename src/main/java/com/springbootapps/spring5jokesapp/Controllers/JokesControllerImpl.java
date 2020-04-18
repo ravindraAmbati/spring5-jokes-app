@@ -6,7 +6,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-@RequestMapping("/jokes")
 @Controller
 public class JokesControllerImpl implements JokesController {
 
@@ -17,11 +16,11 @@ public class JokesControllerImpl implements JokesController {
         this.jokeService = jokeService;
     }
 
-    @RequestMapping("/list")
+    @RequestMapping({"/", ""})
     @Override
     public String publishJoke(Model model) {
         model.addAttribute("joke", this.jokeService.getJoke());
-        return "jokes/list";
+        return "jokes";
     }
 
 }
