@@ -4,7 +4,5 @@ import org.springframework.ui.Model;
 
 public interface JokesController {
 
-    String getJoke();
-
     String publishJoke(Model model);
 }

@@ -1,6 +1,7 @@
 package com.springbootapps.spring5jokesapp.Controllers;
 
-import guru.springframework.norris.chuck.ChuckNorrisQuotes;
+import com.springbootapps.spring5jokesapp.Services.JokeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -9,21 +10,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class JokesControllerImpl implements JokesController {
 
-   private ChuckNorrisQuotes chuckNorrisQuotes;
+    @Autowired
+   private final JokeService jokeService;
 
-    public JokesControllerImpl() {
-        chuckNorrisQuotes = new ChuckNorrisQuotes();
-    }
-
-    @Override
-    public String getJoke() {
-        return chuckNorrisQuotes.getRandomQuote();
+    public JokesControllerImpl(JokeService jokeService) {
+        this.jokeService = jokeService;
     }
 
     @RequestMapping("/list")
     @Override
     public String publishJoke(Model model) {
-        model.addAttribute("joke", this.getJoke());
+        model.addAttribute("joke", this.jokeService.getJoke());
         return "jokes/list";
     }
 
